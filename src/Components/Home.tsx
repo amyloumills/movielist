@@ -37,6 +37,11 @@ const Home: React.FC<Props> = () => {
 				})
 			);
 		};
+	const handleWatchedClick = () => {
+		//update tasks array and keep values where iscomplete is false
+		setMovies((movies) => movies.filter((movie) => !movie.isComplete));
+	};
+	console.log(movies);
 
 	return (
 		<div>
@@ -57,6 +62,9 @@ const Home: React.FC<Props> = () => {
 				onChange={handleNewMovieLabelChange}
 				onKeyPress={handleNewMovieKeyPress}
 			></input>
+			<div>
+				<button onClick={handleWatchedClick}>Clear Watched Movies</button>
+			</div>
 		</div>
 	);
 };
