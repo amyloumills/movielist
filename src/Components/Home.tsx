@@ -37,8 +37,14 @@ const Home: React.FC<Props> = () => {
 				})
 			);
 		};
+
+	const handleMovieDeleteClick = (handledMovie: Movie) => () => {
+		setMovies((movies) =>
+			movies.filter((movie) => movie.id !== handledMovie.id)
+		);
+	};
+
 	const handleWatchedClick = () => {
-		//update tasks array and keep values where iscomplete is false
 		setMovies((movies) => movies.filter((movie) => !movie.isComplete));
 	};
 	console.log(movies);
@@ -54,6 +60,7 @@ const Home: React.FC<Props> = () => {
 							onChange={handleCompleteChange(movie)}
 						/>
 						{movie.label}
+						<button onClick={handleMovieDeleteClick(movie)}>Delete</button>
 					</div>
 				))}
 			</div>
