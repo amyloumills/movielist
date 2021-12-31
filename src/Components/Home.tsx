@@ -17,11 +17,13 @@ const Home: React.FC<Props> = () => {
 		setNewMovieLabel(e.target.value);
 
 	const handleNewMovieKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === 'Enter')
+		if (e.key === 'Enter' && newMovieLabel !== '') {
 			setMovies((movies) => [
 				...movies,
 				{ id: nanoid(), label: newMovieLabel },
 			]);
+			setNewMovieLabel('');
+		}
 	};
 
 	return (
