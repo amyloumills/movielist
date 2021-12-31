@@ -4,13 +4,14 @@ import { nanoid } from 'nanoid';
 // This is List Screen
 
 type Props = {};
-type Movies = {
+type Movie = {
 	id: string;
 	label: string;
+	isComplete: boolean;
 };
 
 const Home: React.FC<Props> = () => {
-	const [movies, setMovies] = useState<Movies[]>([]);
+	const [movies, setMovies] = useState<Movie[]>([]);
 	const [newMovieLabel, setNewMovieLabel] = useState('');
 
 	const handleNewMovieLabelChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -20,19 +21,37 @@ const Home: React.FC<Props> = () => {
 		if (e.key === 'Enter' && newMovieLabel !== '') {
 			setMovies((movies) => [
 				...movies,
-				{ id: nanoid(), label: newMovieLabel },
+				{ id: nanoid(), label: newMovieLabel, isComplete: false },
 			]);
 			setNewMovieLabel('');
 		}
 	};
 
+	const handleCompleteChange =
+		(handledMovie: Movie) => (e: ChangeEvent<HTMLInputElement>) => {
+			setMovies((movies) =>
+				movies.map((movie) => {
+					if (movie.id === handledMovie.id)
+						return { ...movie, isComplete: e.target.checked };
+					return movie;
+				})
+			);
+		};
+
 	return (
 		<div>
-			<ul>
+			<div>
 				{movies.map((movie) => (
-					<li key={movie.id}>{movie.label}</li>
+					<div key={movie.id}>
+						<input
+							type="checkbox"
+							checked={movie.isComplete}
+							onChange={handleCompleteChange(movie)}
+						/>
+						{movie.label}
+					</div>
 				))}
-			</ul>
+			</div>
 			<input
 				value={newMovieLabel}
 				onChange={handleNewMovieLabelChange}
