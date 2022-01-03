@@ -1,17 +1,12 @@
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { nanoid } from 'nanoid';
+import { Movie, MoviesProps } from '../types';
 
 // This is List Screen
 
-type Props = {};
-type Movie = {
-	id: string;
-	label: string;
-	isComplete: boolean;
-};
+type Props = MoviesProps;
 
-const Home: React.FC<Props> = () => {
-	const [movies, setMovies] = useState<Movie[]>([]);
+const Home: React.FC<Props> = ({ movies, setMovies }) => {
 	const [newMovieLabel, setNewMovieLabel] = useState('');
 
 	const handleNewMovieLabelChange = (e: ChangeEvent<HTMLInputElement>) =>
