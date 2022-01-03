@@ -12,7 +12,17 @@ import { Movie } from './types';
 
 function App() {
 	const [movies, setMovies] = useState<Movie[]>([]);
-	const movieProps = { movies, setMovies };
+
+	const updateMovieCompletion = (movieId: string, isComplete: boolean) => {
+		setMovies((movies) =>
+			movies.map((movie) => {
+				if (movie.id === movieId) return { ...movie, isComplete };
+				return movie;
+			})
+		);
+	};
+
+	const movieAPI = { movies, setMovies, updateMovieCompletion };
 
 	return (
 		<Router>
@@ -36,8 +46,8 @@ function App() {
 				</NavLink>
 			</nav>
 			<Routes>
-				<Route path="/" element={<Home {...movieProps} />} />
-				<Route path="/random" element={<Randomize {...movieProps} />} />
+				<Route path="/" element={<Home {...movieAPI} />} />
+				<Route path="/random" element={<Randomize {...movieAPI} />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</Router>

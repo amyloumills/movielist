@@ -6,7 +6,11 @@ import { Movie, MoviesProps } from '../types';
 
 type Props = MoviesProps;
 
-const Home: React.FC<Props> = ({ movies, setMovies }) => {
+const Home: React.FC<Props> = ({
+	movies,
+	setMovies,
+	updateMovieCompletion,
+}) => {
 	const [newMovieLabel, setNewMovieLabel] = useState('');
 
 	const handleNewMovieLabelChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -23,14 +27,8 @@ const Home: React.FC<Props> = ({ movies, setMovies }) => {
 	};
 
 	const handleCompleteChange =
-		(handledMovie: Movie) => (e: ChangeEvent<HTMLInputElement>) => {
-			setMovies((movies) =>
-				movies.map((movie) => {
-					if (movie.id === handledMovie.id)
-						return { ...movie, isComplete: e.target.checked };
-					return movie;
-				})
-			);
+		(movie: Movie) => (e: ChangeEvent<HTMLInputElement>) => {
+			updateMovieCompletion(movie.id, e.target.checked);
 		};
 
 	const handleMovieDeleteClick = (handledMovie: Movie) => () => {

@@ -7,4 +7,5 @@ export type Movie = {
 export type MoviesProps = {
 	movies: Movie[];
 	setMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
+	updateMovieCompletion: (taskId: string, isComplete: boolean) => void;
 };
