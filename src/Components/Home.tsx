@@ -1,5 +1,4 @@
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
-import { nanoid } from 'nanoid';
 import { Movie, MoviesProps } from '../types';
 
 // This is List Screen
@@ -7,6 +6,7 @@ import { Movie, MoviesProps } from '../types';
 type Props = MoviesProps;
 
 const Home: React.FC<Props> = ({
+	addMovie,
 	movies,
 	setMovies,
 	updateMovieCompletion,
@@ -18,10 +18,8 @@ const Home: React.FC<Props> = ({
 
 	const handleNewMovieKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter' && newMovieLabel !== '') {
-			setMovies((movies) => [
-				...movies,
-				{ id: nanoid(), label: newMovieLabel, isComplete: false },
-			]);
+			addMovie({ label: newMovieLabel });
+
 			setNewMovieLabel('');
 		}
 	};

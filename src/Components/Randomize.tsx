@@ -3,17 +3,20 @@ import { MoviesProps } from '../types';
 
 type Props = MoviesProps & {};
 
-const Randomize: React.FC<Props> = ({ movies, updateMovieCompletion }) => {
-	const movie = movies.filter((movie) => !movie.isComplete)[0];
-
+const Randomize: React.FC<Props> = ({
+	focusedMovie: movie,
+	shuffleFocusedMovie,
+	updateMovieCompletion,
+}) => {
 	const handleMarkCompleted = () => {
-		updateMovieCompletion(movie.id, true);
+		if (movie) updateMovieCompletion(movie.id, true);
 	};
 
 	return movie ? (
 		<div>
 			<div>{movie.label}</div>
 			<button onClick={handleMarkCompleted}>Mark Complete</button>
+			<button onClick={shuffleFocusedMovie}>Not feeling it</button>
 		</div>
 	) : (
 		<div>No unwatched movies found</div>

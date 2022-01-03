@@ -9,9 +9,23 @@ import {
 } from 'react-router-dom';
 import NotFound from './Components/NotFound';
 import { Movie } from './types';
+import { shuffle } from 'lodash';
+import { nanoid } from 'nanoid';
 
 function App() {
 	const [movies, setMovies] = useState<Movie[]>([]);
+	const [focusedMovieId, setFocusedMovieId] = useState<string | undefined>(
+		undefined
+	);
+
+	const addMovie = (movie: Pick<Movie, 'label'>) => {
+		const id = nanoid();
+		setMovies((movies) => [
+			...movies,
+			{ id, label: movie.label, isComplete: false },
+		]);
+		if (!focusedMovieId) setFocusedMovieId(id);
+	};
 
 	const updateMovieCompletion = (movieId: string, isComplete: boolean) => {
 		setMovies((movies) =>
@@ -22,7 +36,22 @@ function App() {
 		);
 	};
 
-	const movieAPI = { movies, setMovies, updateMovieCompletion };
+	const focusedMovie = movies.find((movie) => movie.id === focusedMovieId);
+
+	const shuffleFocusedMovie = () => {
+		setFocusedMovieId(
+			shuffle(movies.filter((movie) => !movie.isComplete))[0]?.id
+		);
+	};
+
+	const movieAPI = {
+		addMovie,
+		focusedMovie,
+		movies,
+		setMovies,
+		shuffleFocusedMovie,
+		updateMovieCompletion,
+	};
 
 	return (
 		<Router>
