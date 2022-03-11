@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Home from './Components/Home';
 import Randomize from './Components/Randomize';
 import {
@@ -11,10 +11,12 @@ import NotFound from './Components/NotFound';
 import { Movie } from './types';
 import { shuffle } from 'lodash';
 import { nanoid } from 'nanoid';
+import useStorage from './hooks/useStorage';
 
 function App() {
-	const [movies, setMovies] = useState<Movie[]>([]);
-	const [focusedMovieId, setFocusedMovieId] = useState<string | undefined>(
+	const [movies, setMovies] = useStorage<Movie[]>('movies', []);
+	const [focusedMovieId, setFocusedMovieId] = useStorage<string | undefined>(
+		'randomize',
 		undefined
 	);
 
