@@ -1,13 +1,15 @@
 import React from 'react';
-import { MoviesProps } from '../types';
+import useMovieStore from '../hooks/useMovieStore';
 
-type Props = MoviesProps & {};
+type Props = {};
 
-const Randomize: React.FC<Props> = ({
-	focusedMovie: movie,
-	shuffleFocusedMovie,
-	updateMovieCompletion,
-}) => {
+const Randomize: React.FC<Props> = () => {
+	const {
+		focusedMovie: movie,
+		shuffleFocusedMovie,
+		updateMovieCompletion,
+	} = useMovieStore();
+
 	const handleMarkCompleted = () => {
 		if (movie) updateMovieCompletion(movie.id, true);
 	};

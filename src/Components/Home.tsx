@@ -1,16 +1,15 @@
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
-import { Movie, MoviesProps } from '../types';
+
+import useMovieStore from '../hooks/useMovieStore';
+import { Movie } from '../types';
 
 // This is List Screen
 
-type Props = MoviesProps;
+type Props = {};
 
-const Home: React.FC<Props> = ({
-	addMovie,
-	movies,
-	setMovies,
-	updateMovieCompletion,
-}) => {
+const Home: React.FC<Props> = () => {
+	const { addMovie, movies, setMovies, updateMovieCompletion } =
+		useMovieStore();
 	const [newMovieLabel, setNewMovieLabel] = useState('');
 
 	const handleNewMovieLabelChange = (e: ChangeEvent<HTMLInputElement>) =>
