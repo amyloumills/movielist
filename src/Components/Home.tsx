@@ -1,6 +1,7 @@
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import styled from 'styled-components';
 import ButtonIcon from '../ComponentStyles/ButtonIcon';
+import Checkbox from '../ComponentStyles/Checkbox';
 import Spacer from '../ComponentStyles/Spacer';
 import TextButton from '../ComponentStyles/TextButton';
 import useMovieStore from '../hooks/useMovieStore';
@@ -85,8 +86,7 @@ const Home: React.FC<Props> = () => {
 			<List>
 				{movies.map((movie) => (
 					<ListItem key={movie.id}>
-						<input
-							type="checkbox"
+						<Checkbox
 							checked={movie.isComplete}
 							onChange={handleCompleteChange(movie)}
 						/>
