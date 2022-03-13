@@ -19,6 +19,7 @@ const Layout = styled.div`
 	flex-direction: column;
 	align-items: center;
 	padding: 35px;
+	min-height: 100vh;
 `;
 
 const Nav = styled.nav`
