@@ -8,8 +8,6 @@ import useMovieStore from '../hooks/useMovieStore';
 import DeleteIcon from '../Icons/DeleteIcon';
 import { Movie } from '../types';
 
-// This is List Screen
-
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
