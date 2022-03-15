@@ -37,7 +37,7 @@ const Randomize: React.FC<Props> = () => {
 	return movie ? (
 		<Container>
 			<Movie>{movie.label}</Movie>
-			<Button onClick={handleMarkCompleted}>Mark Complete</Button>
+			<Button onClick={handleMarkCompleted}>Done!</Button>
 			<Spacer height={45} />
 			<TextButton onClick={shuffleFocusedMovie}>Not feeling it</TextButton>
 		</Container>

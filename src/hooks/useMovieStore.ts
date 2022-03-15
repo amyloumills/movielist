@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import useStorage from './useStorage';
 import { Movie } from '../types';
 import { nanoid } from 'nanoid';
 import { shuffle } from 'lodash';
